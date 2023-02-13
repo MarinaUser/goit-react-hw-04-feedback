@@ -1,29 +1,21 @@
 import PropTypes from 'prop-types';
 import { BtnItem, BtnList, Button } from './FeedbackOptions.styled';
 
-const FeedbackOptions = ({ options, onClick }) => {
-  return (
+ const FeedbackOptions = ({ options, onLeaveFeedback }) => (
+  <div>
     <BtnList>
-      {options.map((option, index) => {
-        const label =
-          option.split('')[0].toUpperCase() +
-          option.split('').slice(1).join('');
-
-        return (
-          <BtnItem key={index}>
-            <Button onClick={() => onClick(option)} type="button">
-              {label}
-            </Button>
-          </BtnItem>
-        );
-      })}
+      {options.map(option => (
+        <BtnItem key={option}>
+          <Button onClick={() => onLeaveFeedback(option)}>{option}</Button>
+        </BtnItem>
+      ))}
     </BtnList>
-  );
-};
+  </div>
+);
 
 export default FeedbackOptions;
 
 FeedbackOptions.propTypes = {
-  onClick: PropTypes.func,
-  options: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
